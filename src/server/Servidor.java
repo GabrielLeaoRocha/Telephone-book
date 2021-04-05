@@ -5,6 +5,7 @@ import connections.Conexao;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static services.IntegracaoBd.integraBd;
 
 public class Servidor {
 
@@ -30,6 +31,7 @@ public class Servidor {
 
         Agenda agenda = new Agenda();
         new Servidor();
+        integraBd(agenda);
 
         for(;;){ //looping infinito
 
@@ -57,6 +59,7 @@ public class Servidor {
                 else if(msg[0].equals("2")) { //opcao 2: cadastro
 
                     agenda.addNumero(new Contato(msg[1],msg[2]));
+                    System.out.println("Contato add: " + msg[1] + "/" + msg[2]);
                     c.envia(clienteSocket, "Contato adicionado");
 
                 }

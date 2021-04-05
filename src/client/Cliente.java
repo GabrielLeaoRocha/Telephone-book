@@ -1,13 +1,10 @@
 package client;
 
 import connections.Conexao;
-import services.IntegracaoBd;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
-
-import static services.IntegracaoBd.integraBd;
 
 public class Cliente {
 
