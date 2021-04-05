@@ -1,6 +1,7 @@
 package server;
 
 import connections.Conexao;
+import services.AtualizaBd;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -58,8 +59,9 @@ public class Servidor {
                 }
                 else if(msg[0].equals("2")) { //opcao 2: cadastro
 
-                    agenda.addNumero(new Contato(msg[1],msg[2]));
-                    System.out.println("Contato add: " + msg[1] + "/" + msg[2]);
+                    Contato contato = new Contato(msg[1],msg[2]);
+                    agenda.addNumero(contato);
+                    AtualizaBd.atualizaBd(agenda, contato);
                     c.envia(clienteSocket, "Contato adicionado");
 
                 }
