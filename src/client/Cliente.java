@@ -30,7 +30,7 @@ public class Cliente {
     //main
     public static void main(String[] args) {
 
-        //new Cliente();
+        new Cliente();
         String msg = "";
 
         try {

@@ -44,7 +44,7 @@ public class Servidor {
 
                     for(Contato cont : agenda.getContatos()){
 
-                        if(msg[1].equals(cont.getNome())){
+                        if(msg[1].trim().equals(cont.getNome().trim())){
 
                             c.envia(clienteSocket, cont.toString());
                             System.out.println("Envio: " + cont.getNumero());
