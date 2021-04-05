@@ -59,7 +59,7 @@ public class Servidor {
                 }
                 else if(msg[0].equals("2")) { //opcao 2: cadastro
 
-                    Contato contato = new Contato(msg[1],msg[2]);
+                    Contato contato = new Contato(msg[1],msg[2].trim());
                     agenda.addNumero(contato);
                     AtualizaBd.atualizaBd(agenda, contato);
                     c.envia(clienteSocket, "Contato adicionado");
