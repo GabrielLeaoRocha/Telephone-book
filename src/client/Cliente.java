@@ -36,32 +36,40 @@ public class Cliente {
                     "(1)consultar\n" +
                     "(2)add um numero\n" +
                     ": ");
-            int escolha = sc.nextInt();
+            int opcao = sc.nextInt();
 
             System.out.print("Digite um nome: ");
             sc.nextLine(); //limpa buffer
             String nome = sc.nextLine();
 
-            if (escolha == 1) {
+            switch (opcao) {
 
-                msg = escolha + "/" + nome; //concatena escolha+nome
+                case 1:
 
-            } else if (escolha == 2) {
+                    msg = opcao + "/" + nome; //concatena opcao+nome
 
-                System.out.print("Digite o numero: ");
-                String numero = sc.nextLine(); //recebe numero
+                    break;
 
-                msg = escolha + "/" + nome + "/" + numero; //concatena escolha+nome+numero
+                case 2:
 
-            } else {
+                    System.out.print("Digite o numero: ");
+                    String numero = sc.nextLine(); //recebe numero
 
-                System.err.println("Opção invalida");
+                    msg = opcao + "/" + nome + "/" + numero; //concatena opcao+nome+numero
+
+                    break;
+
+                default:
+
+                    System.err.println("Opção invalida");
+
+                    break;
             }
 
         } catch (Exception e) {
 
-            System.err.println("Error, apenas números" + e.getMessage());
-            msg = "Error";
+            System.err.println("Error, apenas números " + e.getMessage());
+
         }
 
         c.envia(socket, msg); //envia para servidor
@@ -72,7 +80,7 @@ public class Cliente {
         exitConnect();
     }
 
-    static void exitConnect(){
+    static void exitConnect() {
 
         try {
 

@@ -36,40 +36,55 @@ public class Servidor {
 
         for(;;){ //looping infinito
 
-            if(connect()){
+            if(connect()) {
 
                 String texto = c.recebe(clienteSocket); //recebe mensagem crua
-                String [] msg = texto.split("/");
+                String[] msg = texto.split("/");
 
-                if(msg[0].equals("1")){ //opcao 1: consulta
+                int opcao = Integer.parseInt(msg[0]);
 
-                    System.out.println("Req.: " + msg[1]);
+                switch (opcao) {
 
-                    for(Contato cont : agenda.getContatos()){
+                    case 1:  //opcao 1: consulta
 
-                        if(msg[1].trim().equals(cont.getNome().trim())){
+                        System.out.println("Req.: " + msg[1]);
+                        boolean retorno = false;
 
-                            c.envia(clienteSocket, cont.toString());
-                            System.out.println("Envio: " + cont.getNumero());
+                        for (Contato cont : agenda.getContatos()) {
+
+                            if (msg[1].trim().equals(cont.getNome().trim())) {
+
+                                c.envia(clienteSocket, cont.toString());
+                                System.out.println("Envio: " + cont.getNumero());
+                                retorno = true;
+
+                            }
 
                         }
 
-                    }
+                        if (!retorno) { //caso nao tenha encontrado nenhum
 
-                }
-                else if(msg[0].equals("2")) { //opcao 2: cadastro
+                            c.envia(clienteSocket, "Nennhum usuário encontrado");
+                        }
 
-                    Contato contato = new Contato(msg[1],msg[2].trim());
-                    agenda.addNumero(contato);
-                    AtualizaBd.atualizaBd(agenda, contato);
-                    c.envia(clienteSocket, "Contato adicionado");
+                     break;
 
-                }
+                    case 2: //opcao 2: cadastro
+
+                        Contato contato = new Contato(msg[1], msg[2].trim());
+                        agenda.addNumero(contato);
+                        AtualizaBd.atualizaBd(agenda, contato);
+                        c.envia(clienteSocket, "Contato adicionado");
+
+                    break;
+
+                } //fecha switch
 
                 exitConnect();
-            }
-        }
-    }
+
+            }   //fecha if(connect())
+        }       //fecha looping infinito
+    }           //fecha metodo
 
 
     static boolean connect(){
