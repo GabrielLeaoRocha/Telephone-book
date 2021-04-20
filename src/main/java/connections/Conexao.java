@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class Conexao {
+public abstract class Conexao {
 
     public static void envia(Socket socket, String texto){
         OutputStream out;
